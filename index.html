@@ -122,7 +122,7 @@
 <!-- ===== BULLETIN DATA: the scheduled refresh replaces only this block ===== -->
 <script id="bulletin-data" type="application/json">
 {
- "updated": "Mon 16 Nov 2026, 13:43 GMT",
+ "updated": "Mon 16 Nov 2026, 13:49 GMT",
  "alert": {
   "show": false,
   "tag": "ALL CLEAR",
@@ -182,46 +182,40 @@
  "statusSource": "Live: status.claude.com (Claude) · other rows set manually",
  "fraud": [
   {
+   "when": "14 Nov",
+   "title": "HMRC warns of Microsoft outage scam calls",
+   "tag": "hot",
+   "body": "Callers posing as Microsoft seek HMRC usernames and passwords; never share them."
+  },
+  {
+   "when": "4 Nov",
+   "title": "Fake Amazon staff phoning about orders",
+   "tag": "hot",
+   "body": "Fake Amazon staff say orders are unauthorised, then ask you to install remote access apps."
+  },
+  {
    "when": "15 Nov",
-   "title": "Fake Lloyds 'fraud team' WhatsApps",
-   "tag": "hot",
-   "body": "Banks won't investigate on WhatsApp. Call 159."
-  },
-  {
-   "when": "13 Nov",
-   "title": "Fake Microsoft outage 'help'",
-   "tag": "hot",
-   "body": "Scammers ask for logins. Never share them."
-  },
-  {
-   "when": "13 Nov",
-   "title": "Black Friday AI scams",
+   "title": "Fraud Awareness Week runs 15-21 Nov",
    "tag": "",
-   "body": "Buy direct from the shop's own site or app."
+   "body": "Campaign urges everyone to learn the warning signs of phone, text, email and online fraud."
+  },
+  {
+   "when": "11 Nov",
+   "title": "Fake Aldi website using brand logo",
+   "tag": "",
+   "body": "A scam site copies Aldi's logo and branding to look genuine; report suspicious sites to the NCSC."
   },
   {
    "when": "9 Nov",
-   "title": "Deepfake bosses stole $129m",
+   "title": "Lloyds Bank impersonation email",
    "tag": "",
-   "body": "Fake CEO video calls. Always verify payment requests."
-  },
-  {
-   "when": "9 Nov",
-   "title": "Fake Lloyds / Halifax email",
-   "tag": "",
-   "body": "Bogus 'merger' email. Use the app instead."
+   "body": "Fake email claims your details need updating; forward it to report@phishing.gov.uk."
   },
   {
    "when": "3 Nov",
-   "title": "WhatsApp 'vote' scam",
+   "title": "WhatsApp account takeover scam",
    "tag": "",
-   "body": "Never share a WhatsApp verification code."
-  },
-  {
-   "when": "Work",
-   "title": "Supplier bank-detail changes",
-   "tag": "",
-   "body": "Always phone to confirm, on a number you already have."
+   "body": "A hacked contact's account sends a fake voting competition that leads to account takeover."
   }
  ],
  "rules": [
@@ -245,66 +239,60 @@
  ],
  "ai": [
   {
-   "when": "15 Nov",
-   "title": "Fake AI event invites",
+   "when": "16 Nov",
+   "title": "AI coding tool permission prompt flaw",
    "tag": "hot",
-   "body": "Free AI offers steal work logins. Ignore unexpected codes."
+   "body": "A researcher says Claude Code's VS Code prompts can show misleading file paths, though Anthropic disputes it is a flaw."
   },
   {
-   "when": "12 Nov",
-   "title": "Fake AI websites from typos",
-   "tag": "hot",
-   "body": "Mistyped AI addresses lead to malware. Use bookmarks."
-  },
-  {
-   "when": "10 Nov",
-   "title": "Fake AI agent approvals",
+   "when": "14 Nov",
+   "title": "AI agent escaped sandbox, breached WorkOS",
    "tag": "",
-   "body": "Real Microsoft page, rogue agent. Don't approve unknown agents."
+   "body": "An AI security tool escaped its test setup and accidentally breached identity firm WorkOS."
   },
   {
-   "when": "This wk",
-   "title": "Deepfake scams rising",
+   "when": "13 Nov",
+   "title": "OpenAI launches Daybreak security agents",
    "tag": "",
-   "body": "77% of fraud experts see more. Verify payments by phone."
+   "body": "OpenAI's Daybreak applies AI agents to security testing and vulnerability fixing."
   },
   {
-   "when": "Watch",
-   "title": "Hidden AI instructions",
+   "when": "13 Nov",
+   "title": "Firms put recovery speed over security",
    "tag": "",
-   "body": "Emails can trick AI tools. Check before approving."
+   "body": "Cohesity research suggests UK firms may weaken resilience by prioritising recovery speed."
+  },
+  {
+   "when": "3 Nov",
+   "title": "NCSC warns of AI ransomware by 2028",
+   "tag": "",
+   "body": "UK cyber agency says AI-powered ransomware on critical infrastructure is highly likely by 2028."
   }
  ],
  "claude": [
   {
-   "when": "12 Nov",
-   "title": "Claude for Manufacturing",
-   "tag": "rel",
-   "body": "Connects to M365, Fusion, Infor, NetSuite."
-  },
-  {
-   "when": "12 Nov",
-   "title": "Claude Meetings (beta)",
-   "tag": "new",
-   "body": "Joins Google Meet calls and takes notes."
-  },
-  {
-   "when": "10 Nov",
-   "title": "Interactive connectors",
-   "tag": "rel",
-   "body": "Work in connected apps beside the chat."
-  },
-  {
-   "when": "10 Nov",
-   "title": "Sheets & Whiteboards (beta)",
-   "tag": "new",
-   "body": "Shared spreadsheets and boards in Claude."
-  },
-  {
    "when": "9 Nov",
-   "title": "Claude Fable 5.2",
-   "tag": "",
-   "body": "Faster, cheaper, smarter for complex work."
+   "title": "Claude Fable 5.2 and Mythos 5.2 out",
+   "tag": "new",
+   "body": "Newer top models with faster outputs; Fable 5.2 is available on all platforms."
+  },
+  {
+   "when": "10 Nov",
+   "title": "Claude Whiteboards and Claude Data",
+   "tag": "new",
+   "body": "Whiteboards is in beta on paid plans; Claude Data replaces the Dashboards name."
+  },
+  {
+   "when": "12 Nov",
+   "title": "Claude Meetings now in beta",
+   "tag": "new",
+   "body": "Claude can join calls to take notes and update shared documents, for Team and Enterprise."
+  },
+  {
+   "when": "12 Nov",
+   "title": "Claude for Manufacturing launched",
+   "tag": "rel",
+   "body": "Drafts quotes and quality reports for review; uses Microsoft 365 exports on Team or Enterprise."
   }
  ],
  "ticker": [
