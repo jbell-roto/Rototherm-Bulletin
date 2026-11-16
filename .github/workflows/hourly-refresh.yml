@@ -21,6 +21,11 @@ jobs:
       - name: Update timestamp and live Claude status
         run: python3 scripts/update_status.py
 
+      - name: Refresh fraud/AI/Claude content via Claude API
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python3 scripts/update_content.py
+
       - name: Commit and push if changed
         run: |
           if git diff --quiet -- index.html; then
