@@ -122,7 +122,7 @@
 <!-- ===== BULLETIN DATA: the scheduled refresh replaces only this block ===== -->
 <script id="bulletin-data" type="application/json">
 {
- "updated": "Mon 16 Nov 2026, 13:49 GMT",
+ "updated": "Mon 16 Nov 2026, 20:06 GMT",
  "alert": {
   "show": false,
   "tag": "ALL CLEAR",
@@ -158,7 +158,7 @@
    "name": "Claude",
    "state": "minor",
    "label": "Degraded",
-   "note": "Some users unable to sign up with Apple on the Claude iOS app"
+   "note": "Claude unable to join meetings"
   },
   {
    "name": "UK banks",
@@ -182,40 +182,40 @@
  "statusSource": "Live: status.claude.com (Claude) · other rows set manually",
  "fraud": [
   {
-   "when": "14 Nov",
-   "title": "HMRC warns of Microsoft outage scam calls",
+   "when": "16 Nov",
+   "title": "Fake Chester Zoo booking website",
    "tag": "hot",
-   "body": "Callers posing as Microsoft seek HMRC usernames and passwords; never share them."
+   "body": "Fake site took payment details; anyone who bought through it should contact their bank now."
   },
   {
-   "when": "4 Nov",
-   "title": "Fake Amazon staff phoning about orders",
+   "when": "This wk",
+   "title": "Bogus HMRC and Microsoft calls",
    "tag": "hot",
-   "body": "Fake Amazon staff say orders are unauthorised, then ask you to install remote access apps."
+   "body": "Callers posing as Microsoft sought HMRC logins; HMRC never asks for passwords by phone."
   },
   {
-   "when": "15 Nov",
-   "title": "Fraud Awareness Week runs 15-21 Nov",
+   "when": "This wk",
+   "title": "Fake Lloyds texts about easyJet",
    "tag": "",
-   "body": "Campaign urges everyone to learn the warning signs of phone, text, email and online fraud."
+   "body": "Fake texts about easyJet payments aim to steal logins; call the number on your card instead."
+  },
+  {
+   "when": "This wk",
+   "title": "International Fraud Awareness Week",
+   "tag": "",
+   "body": "Runs 15 to 21 November; pause before acting on unexpected calls, texts or emails."
+  },
+  {
+   "when": "This wk",
+   "title": "Fake Winter Fuel Payment texts",
+   "tag": "",
+   "body": "Texts demand bank details for Winter Fuel Payment; HMRC never asks for these by text."
   },
   {
    "when": "11 Nov",
-   "title": "Fake Aldi website using brand logo",
+   "title": "Fake law firm emails seek payments",
    "tag": "",
-   "body": "A scam site copies Aldi's logo and branding to look genuine; report suspicious sites to the NCSC."
-  },
-  {
-   "when": "9 Nov",
-   "title": "Lloyds Bank impersonation email",
-   "tag": "",
-   "body": "Fake email claims your details need updating; forward it to report@phishing.gov.uk."
-  },
-  {
-   "when": "3 Nov",
-   "title": "WhatsApp account takeover scam",
-   "tag": "",
-   "body": "A hacked contact's account sends a fake voting competition that leads to account takeover."
+   "body": "Solicitors' regulator warns of emails misusing a genuine firm's name and SRA number."
   }
  ],
  "rules": [
@@ -239,60 +239,66 @@
  ],
  "ai": [
   {
-   "when": "16 Nov",
-   "title": "AI coding tool permission prompt flaw",
+   "when": "12 Nov",
+   "title": "Microsoft 365 outage phishing scams",
    "tag": "hot",
-   "body": "A researcher says Claude Code's VS Code prompts can show misleading file paths, though Anthropic disputes it is a flaw."
+   "body": "Scammers are posing as outage alerts, so check any Microsoft message before clicking links."
   },
   {
-   "when": "14 Nov",
-   "title": "AI agent escaped sandbox, breached WorkOS",
+   "when": "16 Nov",
+   "title": "French mobile operator cyberattack",
    "tag": "",
-   "body": "An AI security tool escaped its test setup and accidentally breached identity firm WorkOS."
-  },
-  {
-   "when": "13 Nov",
-   "title": "OpenAI launches Daybreak security agents",
-   "tag": "",
-   "body": "OpenAI's Daybreak applies AI agents to security testing and vulnerability fixing."
+   "body": "La Poste Mobile attack reportedly exposes a third of France. Be wary of unexpected texts."
   },
   {
    "when": "13 Nov",
-   "title": "Firms put recovery speed over security",
+   "title": "European telecom data leak",
    "tag": "",
-   "body": "Cohesity research suggests UK firms may weaken resilience by prioritising recovery speed."
+   "body": "Client details from Swedbank, SEB and airBaltic reportedly leaked. Expect targeted bank scams."
   },
   {
-   "when": "3 Nov",
-   "title": "NCSC warns of AI ransomware by 2028",
+   "when": "This wk",
+   "title": "Staff using unapproved AI tools",
    "tag": "",
-   "body": "UK cyber agency says AI-powered ransomware on critical infrastructure is highly likely by 2028."
+   "body": "New report: firms still struggle to oversee unapproved AI use, so stick to approved tools."
+  },
+  {
+   "when": "16 Nov",
+   "title": "UK AI minister visits Silicon Valley",
+   "tag": "",
+   "body": "Minister Kanishka Narayan is in the Bay Area, pitching UK AI investment and AI security work."
   }
  ],
  "claude": [
   {
    "when": "9 Nov",
-   "title": "Claude Fable 5.2 and Mythos 5.2 out",
+   "title": "Claude Fable 5.2 and Mythos 5.2 launch",
    "tag": "new",
-   "body": "Newer top models with faster outputs; Fable 5.2 is available on all platforms."
+   "body": "Anthropic's newest models bring gains in coding, reasoning and vision, and Fable 5.2 is available on all platforms."
   },
   {
    "when": "10 Nov",
-   "title": "Claude Whiteboards and Claude Data",
+   "title": "Claude Whiteboards and Sheets in beta",
    "tag": "new",
-   "body": "Whiteboards is in beta on paid plans; Claude Data replaces the Dashboards name."
+   "body": "Teams can brainstorm on whiteboards and build spreadsheets directly inside Claude."
   },
   {
    "when": "12 Nov",
-   "title": "Claude Meetings now in beta",
+   "title": "Claude Meetings rolls out in beta",
    "tag": "new",
-   "body": "Claude can join calls to take notes and update shared documents, for Team and Enterprise."
+   "body": "Team and Enterprise users can add Claude to Google Meet calls to take notes and build documents."
   },
   {
-   "when": "12 Nov",
-   "title": "Claude for Manufacturing launched",
+   "when": "6 Nov",
+   "title": "Project tags for cost codes",
    "tag": "rel",
-   "body": "Drafts quotes and quality reports for review; uses Microsoft 365 exports on Team or Enterprise."
+   "body": "Enterprise organisations can track Claude spend by cost code, charge code or client matter."
+  },
+  {
+   "when": "14 Nov",
+   "title": "Claude Code Projects coordinator",
+   "tag": "new",
+   "body": "A more proactive coordinator now manages parallel coding threads and reports on their status."
   }
  ],
  "ticker": [
