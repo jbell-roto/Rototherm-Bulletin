@@ -1,8 +1,12 @@
-name: Hourly bulletin refresh
+name: Bulletin refresh (8am & 12pm UK)
 
 on:
   schedule:
-    - cron: '0 * * * *'
+    # 08:07 and 12:07 UTC. A few minutes past the hour, not on it, since
+    # GitHub's scheduler is most congested (and most likely to delay runs)
+    # right at :00. UK is UTC+0 in winter (GMT) and UTC+1 in summer (BST),
+    # so during BST this lands at ~9:07am and ~1:07pm local instead.
+    - cron: '7 8,12 * * *'
   workflow_dispatch: {}
 
 permissions:
@@ -34,6 +38,6 @@ jobs:
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add index.html
-            git commit -m "Hourly bulletin refresh"
+            git commit -m "Bulletin refresh"
             git push
           fi
