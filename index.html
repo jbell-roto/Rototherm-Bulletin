@@ -122,7 +122,7 @@
 <!-- ===== BULLETIN DATA: the scheduled refresh replaces only this block ===== -->
 <script id="bulletin-data" type="application/json">
 {
- "updated": "Tue 17 Nov 2026, 20:46 GMT",
+ "updated": "Wed 18 Nov 2026, 17:10 GMT",
  "alert": {
   "show": false,
   "tag": "ALL CLEAR",
@@ -158,7 +158,7 @@
    "name": "Claude",
    "state": "minor",
    "label": "Degraded",
-   "note": "Some users unable to sign in with Apple on claude.ai and the Claude iOS app"
+   "note": "Claude unable to join meetings"
   },
   {
    "name": "UK banks",
@@ -182,40 +182,40 @@
  "statusSource": "Live: status.claude.com (Claude) · other rows set manually",
  "fraud": [
   {
-   "when": "Today",
-   "title": "HMRC Self Assessment scam surge",
+   "when": "17 Nov",
+   "title": "Fake HMRC messages on Self Assessment",
    "tag": "hot",
-   "body": "1,704 Self Assessment scams reported in a year; check GOV.UK before acting on any HMRC contact."
-  },
-  {
-   "when": "14 Nov",
-   "title": "Fake Microsoft calls seeking HMRC logins",
-   "tag": "hot",
-   "body": "Callers claiming to be Microsoft want HMRC logins; Microsoft and HMRC never ask for these."
-  },
-  {
-   "when": "12 Nov",
-   "title": "Safe account scam warning",
-   "tag": "",
-   "body": "Banks, police and the FCA never ask you to move money to a 'safe account'. Call 159."
+   "body": "HMRC logged 48,119 impersonation scam reports in a year. It never texts or emails about refunds."
   },
   {
    "when": "10 Nov",
-   "title": "Fake Lloyds one-time code texts",
-   "tag": "",
-   "body": "Fake texts quote an EasyJet payment and a code; never share one-time codes."
+   "title": "Fake Lloyds texts with fake OTP codes",
+   "tag": "hot",
+   "body": "Texts quoting easyJet payments and a one-time code aim to steal login details. Never share codes."
   },
   {
-   "when": "9 Nov",
-   "title": "Fake Lloyds update emails",
+   "when": "13 Nov",
+   "title": "Microsoft outage used in HMRC scam",
    "tag": "",
-   "body": "Emails saying your details need updating are scams; forward them to report@phishing.gov.uk."
+   "body": "Fake Microsoft messages after the outage seek HMRC login details. Don't reply."
+  },
+  {
+   "when": "This wk",
+   "title": "Fake police and courier fraud rising",
+   "tag": "",
+   "body": "Callers posing as police or bank staff ask for cash or cards. Hang up, then call 159."
+  },
+  {
+   "when": "15 Nov",
+   "title": "Hundreds of lookalike UK brand sites",
+   "tag": "",
+   "body": "Hundreds of fake sites copying UK brands were flagged. Check web addresses before paying."
   },
   {
    "when": "16 Nov",
-   "title": "Black Friday: stop, think, check",
+   "title": "Black Friday shopping scams warned",
    "tag": "",
-   "body": "Scammers pose as banks, couriers or friends; never pay via links in unexpected messages."
+   "body": "Fraudsters posing as banks, delivery firms or family target shoppers. Pause before paying."
   }
  ],
  "rules": [
@@ -239,72 +239,60 @@
  ],
  "ai": [
   {
-   "when": "This wk",
-   "title": "Urgent: patch PHP security flaw",
+   "when": "17 Nov",
+   "title": "UK warned of surge in cyber incidents",
    "tag": "hot",
-   "body": "NCSC urges UK organisations to act now on a PHP flaw; IT teams should apply fixes promptly."
+   "body": "NCSC chief warns of an unprecedented rise in cyber incidents in coming months."
   },
   {
    "when": "16 Nov",
-   "title": "Hackers now use AI agents for attacks",
+   "title": "Hackers using AI agents to build exploits",
    "tag": "",
-   "body": "Google says criminals use autonomous AI agents to turn software patches into working attacks."
-  },
-  {
-   "when": "This wk",
-   "title": "Hacked web script hit BBC, CNN visitors",
-   "tag": "",
-   "body": "Malicious code in a third-party tool reached visitors of BBC, CNN and Zoom sites."
-  },
-  {
-   "when": "3 Nov",
-   "title": "AI ransomware threat to UK infrastructure",
-   "tag": "",
-   "body": "NCSC urges UK critical infrastructure to prepare for AI-powered ransomware by 2028."
-  },
-  {
-   "when": "This wk",
-   "title": "Supplier breach exposed Uber driver data",
-   "tag": "",
-   "body": "US Uber drivers' data was exposed through AI supplier Fireworks AI; check your suppliers too."
+   "body": "Google says attackers now use autonomous AI agents to build and run exploits."
   },
   {
    "when": "17 Nov",
-   "title": "MPs warn UK unprepared for cyber threats",
+   "title": "AI bug-hunting pilot finds open-source flaws",
    "tag": "",
-   "body": "MPs criticise the government's cyber stance; NCC Group says the new bill could help."
+   "body": "An AI-assisted scan helped fix 55 vulnerabilities across six open-source projects."
+  },
+  {
+   "when": "10 Nov",
+   "title": "AI platform breach widens",
+   "tag": "",
+   "body": "Fireworks AI says its breach now reaches billing info and some account data."
   }
  ],
  "claude": [
   {
+   "when": "17 Nov",
+   "title": "Choose a Claude Desktop release channel",
+   "tag": "new",
+   "body": "You can now pick which Claude Desktop version you receive when the app updates."
+  },
+  {
+   "when": "17 Nov",
+   "title": "Claude Cowork now on web and mobile",
+   "tag": "new",
+   "body": "Cowork sessions and files are saved to your account, so you can pick them up on any device."
+  },
+  {
+   "when": "12 Nov",
+   "title": "Claude Meetings enters beta",
+   "tag": "new",
+   "body": "Team and Enterprise can try it; new Team call invites are paused after a capacity incident."
+  },
+  {
    "when": "9 Nov",
-   "title": "Claude Fable 5.2 and Mythos 5.2 launched",
-   "tag": "new",
-   "body": "New top models for demanding coding and analysis; Mythos 5.2 is limited to verified organisations."
-  },
-  {
-   "when": "12 Nov",
-   "title": "Claude for Manufacturing launched",
+   "title": "Fable 5.2 now on Microsoft Azure",
    "tag": "rel",
-   "body": "Now available on Team and Enterprise plans; ask IT whether our organisation has access."
+   "body": "The new Claude model is also offered through Microsoft Azure, alongside AWS and Google Cloud."
   },
   {
-   "when": "12 Nov",
-   "title": "Claude Meetings joins video calls",
-   "tag": "new",
-   "body": "In beta for Team and Enterprise: Claude can join Google Meet calls and take notes."
-  },
-  {
-   "when": "10 Nov",
-   "title": "Whiteboards and Sheets in beta",
-   "tag": "new",
-   "body": "Teams can brainstorm on whiteboards and build spreadsheets directly inside Claude."
-  },
-  {
-   "when": "10 Nov",
-   "title": "Chat and Cowork merged into one",
-   "tag": "new",
-   "body": "One conversation now chooses the right tool, rolling out in stages to paid plans."
+   "when": "5 Nov",
+   "title": "New Enterprise security and admin tools",
+   "tag": "rel",
+   "body": "Enterprise gets a security centre and central admin controls, several in beta."
   }
  ],
  "ticker": [
