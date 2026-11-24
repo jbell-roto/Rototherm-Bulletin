@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Hourly refresh: regenerates the fraud alerts, AI/security news and Claude
-updates sections of the bulletin-data JSON block using the Claude API with
-web search. Leaves everything else in that block untouched. Skips cleanly
-(no error) if ANTHROPIC_API_KEY isn't set, and each of the three sections is
-fetched and validated independently so one bad/truncated response can't
-block the other two or break the live page.
+"""Hourly refresh: regenerates the fraud alerts and AI/security news sections
+of the bulletin-data JSON block using the Claude API with web search. Leaves
+everything else in that block untouched (including healthSafety and rota,
+which are maintained by hand). Skips cleanly (no error) if ANTHROPIC_API_KEY
+isn't set, and each section is fetched and validated independently so one
+bad/truncated response can't block the other or break the live page.
 """
 import json
 import os
@@ -38,15 +38,6 @@ SECTIONS = {
         "count": "exactly 3",
         "tag_rule": '"tag" is "hot" for the single most urgent item, else "".',
         "topic": "the 3 most recent AI & cyber-security news items relevant to an ordinary office worker",
-    },
-    "claude": {
-        "count": "exactly 1 — the single newest item",
-        "tag_rule": (
-            '"tag" is "new" if it is a brand-new feature/release (last ~2 weeks), "rel" if it '
-            'is specifically relevant to a UK manufacturing/engineering business using '
-            'Microsoft 365, else "".'
-        ),
-        "topic": "the single most recent Claude / Anthropic product update or release",
     },
 }
 
