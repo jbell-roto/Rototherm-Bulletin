@@ -55,8 +55,10 @@ def build_prompt(section, today_label):
         f"- {cfg['count']} items.\n"
         f"- {cfg['tag_rule']}\n"
         '- "when" is a short date like "15 Nov" or a short label like "This wk"/"Today".\n'
-        '- "title" under 40 characters. "body" one short, punchy phrase, under 70 characters, '
-        "plain English — a TV screen glance, not a full sentence.\n"
+        '- "title" under 40 characters. "body" under 60 characters — a handful of words a '
+        "TV screen glance can take in, not a sentence. Example body length: "
+        '"HMRC never texts about refunds. Forward to 60599." (51 chars). Cut connecting '
+        "words rather than go over.\n"
         "- Do not invent facts or fake sources. Finish the JSON completely; keep items short "
         "enough that the whole array fits easily within the response budget.\n"
         "- No markdown, no bullet points, no extra keys, no trailing commentary after the "
@@ -112,9 +114,9 @@ def validate_items(items):
             return False
         if not all(k in item for k in ("when", "title", "tag", "body")):
             return False
-        if not isinstance(item["title"], str) or len(item["title"]) > 70:
+        if not isinstance(item["title"], str) or len(item["title"]) > 60:
             return False
-        if not isinstance(item["body"], str) or len(item["body"]) > 140:
+        if not isinstance(item["body"], str) or len(item["body"]) > 90:
             return False
     return True
 
