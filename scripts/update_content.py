@@ -26,27 +26,27 @@ BLOCK_RE = re.compile(
 
 SECTIONS = {
     "fraud": {
-        "count": "5-7",
-        "tag_rule": '"tag" is "hot" for the 1-2 most urgent/current items, else "".',
+        "count": "exactly 3",
+        "tag_rule": '"tag" is "hot" for the single most urgent/current item, else "".',
         "topic": (
-            "current UK-relevant fraud/scam alerts: bank and payment scams, phishing, "
-            "deepfakes, impersonation scams, texts/emails pretending to be banks, HMRC, "
-            "couriers or well-known companies"
+            "the 3 most recent UK-relevant fraud/scam alerts: bank and payment scams, "
+            "phishing, deepfakes, impersonation scams, texts/emails pretending to be banks, "
+            "HMRC, couriers or well-known companies"
         ),
     },
     "ai": {
-        "count": "4-6",
-        "tag_rule": '"tag" is "hot" for the most urgent item(s), else "".',
-        "topic": "current AI & cyber-security news relevant to an ordinary office worker",
+        "count": "exactly 3",
+        "tag_rule": '"tag" is "hot" for the single most urgent item, else "".',
+        "topic": "the 3 most recent AI & cyber-security news items relevant to an ordinary office worker",
     },
     "claude": {
-        "count": "4-6",
+        "count": "exactly 1 — the single newest item",
         "tag_rule": (
-            '"tag" is "new" for a brand-new feature/release (last ~2 weeks), "rel" if it is '
-            'specifically relevant to a UK manufacturing/engineering business using '
+            '"tag" is "new" if it is a brand-new feature/release (last ~2 weeks), "rel" if it '
+            'is specifically relevant to a UK manufacturing/engineering business using '
             'Microsoft 365, else "".'
         ),
-        "topic": "recent Claude / Anthropic product updates or releases",
+        "topic": "the single most recent Claude / Anthropic product update or release",
     },
 }
 
@@ -64,8 +64,8 @@ def build_prompt(section, today_label):
         f"- {cfg['count']} items.\n"
         f"- {cfg['tag_rule']}\n"
         '- "when" is a short date like "15 Nov" or a short label like "This wk"/"Today".\n'
-        '- "title" under 45 characters. "body" one short sentence, under 100 characters, '
-        "plain English.\n"
+        '- "title" under 40 characters. "body" one short, punchy phrase, under 70 characters, '
+        "plain English — a TV screen glance, not a full sentence.\n"
         "- Do not invent facts or fake sources. Finish the JSON completely; keep items short "
         "enough that the whole array fits easily within the response budget.\n"
         "- No markdown, no bullet points, no extra keys, no trailing commentary after the "

@@ -8,34 +8,50 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+  /* Same dark TV-signage palette as the live bulletin — this is a preview of that page, not a new design */
   :root{
     --bg:#0b1220; --panel:#111a2e; --panel2:#16213a; --line:#22304d;
     --text:#e8edf6; --muted:#9aa8c2; --dim:#6b7a96;
     --ok:#22c55e; --minor:#f5b014; --major:#ef4444; --info:#60a5fa; --violet:#a78bfa;
+    color-scheme: dark;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;overflow:hidden}
-  body{display:grid;grid-template-rows:auto auto 1fr auto;height:100vh;padding:1vw 1.6vw 0;gap:.8vw}
-  header{display:flex;align-items:center;justify-content:space-between}
+  html,body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif}
+  html,body{height:100%;overflow:hidden}
+  body{display:grid;grid-template-rows:auto auto 1fr auto;height:100vh;gap:.8vw;padding-block:1vw 0;padding-left:max(16px,1.6vw,env(safe-area-inset-left,0px));padding-right:max(16px,1.6vw,env(safe-area-inset-right,0px))}
+  header{display:flex;align-items:center;justify-content:space-between;gap:1vw}
   .brand{display:flex;align-items:center;gap:1vw}
-  .logo{width:3.2vw;height:3.2vw;border-radius:.6vw;background:linear-gradient(135deg,#3b82f6,#8b5cf6);display:grid;place-items:center;font-weight:800;font-size:1.35vw}
   h1{font-size:1.8vw;font-weight:800;letter-spacing:-.02em}
   .sub{color:var(--muted);font-size:0.857vw;margin-top:.15vw}
   .clock{text-align:right}
   .time{font-size:2.35vw;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
   .date{color:var(--muted);font-size:0.902vw}
+  .logo-img{width:4.6vw;height:4.6vw;object-fit:contain;display:block}
+
+
   .alert{display:flex;align-items:center;gap:1.2vw;background:linear-gradient(90deg,rgba(239,68,68,.22),rgba(239,68,68,.06));border:1px solid rgba(239,68,68,.55);border-radius:.8vw;padding:.6vw 1.3vw}
   .alert.hidden{display:none}
   .alert .tag{background:var(--major);color:#fff;font-weight:800;font-size:0.812vw;padding:.35vw .7vw;border-radius:.4vw;letter-spacing:.06em;white-space:nowrap;animation:pulse 2s infinite}
   .alert .msg{font-size:1.53vw;font-weight:600;line-height:1.35}
   .alert .msg span{color:#fca5a5;font-weight:500}
   @keyframes pulse{50%{opacity:.55}}
-  main{display:grid;grid-template-columns:1.05fr 1.2fr 1fr;grid-template-rows:1fr 1fr;gap:1vw;min-height:0}
+  main{display:grid;grid-template-columns:1.05fr 1.2fr 1fr;grid-template-rows:1.3fr .7fr;gap:1vw;min-height:0}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:1vw;padding:1.1vw 1.3vw;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   .card h2{display:flex;align-items:center;gap:.6vw;font-size:1.35vw;font-weight:700;margin-bottom:.8vw;text-transform:uppercase;letter-spacing:.05em}
   .card h2 .dot{width:.75vw;height:.75vw;border-radius:50%}
-  .status{grid-row:span 2}
-  .fraud{grid-row:span 2}
+  .status{grid-column:1;grid-row:1}
+  .upcoming{grid-column:1;grid-row:2}
+  .fraud{grid-column:2;grid-row:1 / span 2}
+  .ai-card{grid-column:3;grid-row:1}
+  .claude-card{grid-column:3;grid-row:2}
+  .upcoming .u-list{margin-bottom:.6vw}
+  .upcoming .u-row{display:flex;align-items:baseline;gap:.6vw;padding:.55vw 0;border-bottom:1px solid var(--line)}
+  .upcoming .u-row:last-child{border-bottom:none}
+  .upcoming .u-date{flex:none;font-size:0.857vw;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;min-width:4.4vw}
+  .upcoming .u-name{font-weight:700;font-size:1.49vw;line-height:1.3}
+  .upcoming .u-tag{font-size:0.7vw;font-weight:700;color:#93c5fd;background:rgba(96,165,250,.18);padding:.12vw .5vw;border-radius:1vw;margin-left:.4vw;vertical-align:middle}
+  .upcoming h3{font-size:0.857vw;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:.05em;margin:.7vw 0 .3vw}
+  .upcoming .u-empty{color:var(--muted);font-size:1.1vw}
   .scroll{flex:1;min-height:0;overflow:hidden;position:relative}
   .scroll-inner{will-change:transform}
   .svc{display:flex;align-items:flex-start;gap:.8vw;padding:.8vw 0;border-bottom:1px solid var(--line)}
@@ -48,6 +64,10 @@
   .svc-state{font-size:0.902vw;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-left:.4vw}
   .svc-state.ok{color:var(--ok)} .svc-state.minor{color:var(--minor)} .svc-state.major{color:#f87171}
   .svc-note{color:var(--muted);font-size:1.17vw;line-height:1.35;margin-top:.15vw}
+  .allclear{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;flex:1;gap:.6vw;color:var(--muted)}
+  .allclear .tick{width:3.4vw;height:3.4vw;border-radius:50%;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.5);display:grid;place-items:center;font-size:1.8vw;color:var(--ok)}
+  .allclear .headline{font-size:1.35vw;font-weight:800;color:var(--text)}
+  .allclear .sub2{font-size:0.95vw}
   .item{padding:.9vw 0;border-bottom:1px solid var(--line)}
   .item:last-child{border-bottom:none}
   .item-top{display:flex;align-items:baseline;gap:.6vw}
@@ -62,7 +82,7 @@
   .rule{background:var(--panel2);border-radius:.7vw;padding:.7vw .9vw}
   .rule b{display:block;font-size:1.71vw;font-weight:800;color:#fde68a}
   .rule span{font-size:0.947vw;color:var(--muted);line-height:1.3;display:block;margin-top:.1vw}
-  footer{display:flex;align-items:center;gap:1vw;height:4vw;border-top:1px solid var(--line);margin:0 -1.6vw;padding:0 1.6vw;background:#0e1628;overflow:hidden}
+  footer{display:flex;align-items:center;gap:1vw;height:4vw;border-top:1px solid var(--line);padding:0 1.6vw;margin:0 -1.6vw;background:#0e1628;overflow:hidden}
   .tick-label{flex:none;font-weight:800;font-size:1.04vw;color:#fde68a;letter-spacing:.06em}
   .ticker{flex:1;overflow:hidden;white-space:nowrap;mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent)}
   .ticker-track{display:inline-block;padding-left:100%;animation:tick 110s linear infinite;font-size:1.31vw;color:var(--text)}
@@ -71,10 +91,22 @@
   @keyframes tick{to{transform:translateX(-100%)}}
   .updated{flex:none;font-size:0.857vw;color:var(--dim)}
   .src{font-size:0.857vw;color:var(--dim);margin-top:.5vw}
-  .logo-img{width:4.6vw;height:4.6vw;object-fit:contain;display:block}
+
+  .seasonal-layer{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:40}
+  .particle{position:absolute;top:-8vh;line-height:1;animation-name:seasonal-fall;animation-timing-function:linear;animation-fill-mode:forwards;filter:drop-shadow(0 1px 2px rgba(0,0,0,.3))}
+  @keyframes seasonal-fall{
+    0%{transform:translate(0,-10vh) rotate(0deg);opacity:0}
+    8%{opacity:.9}
+    30%{transform:translate(var(--dx1),28vh) rotate(90deg)}
+    60%{transform:translate(var(--dx2),62vh) rotate(200deg)}
+    85%{transform:translate(var(--dx1),88vh) rotate(300deg)}
+    100%{transform:translate(0,112vh) rotate(380deg);opacity:.7}
+  }
 </style>
 </head>
 <body>
+
+<div class="seasonal-layer" id="seasonalLayer"></div>
 
 <header>
   <div class="brand">
@@ -92,8 +124,13 @@
 <main>
   <section class="card status">
     <h2><i class="dot" style="background:var(--ok)"></i>Service status</h2>
-    <div class="scroll"><div class="scroll-inner" id="services"></div></div>
+    <div class="scroll" id="servicesWrap"><div class="scroll-inner" id="services"></div></div>
     <div class="src" id="statusSrc"></div>
+  </section>
+
+  <section class="card upcoming">
+    <h2><i class="dot" style="background:var(--info)"></i>Upcoming in Rototherm</h2>
+    <div class="scroll"><div class="scroll-inner" id="upcoming"></div></div>
   </section>
 
   <section class="card fraud">
@@ -102,12 +139,12 @@
     <div class="rules" id="rules"></div>
   </section>
 
-  <section class="card">
+  <section class="card ai-card">
     <h2><i class="dot" style="background:var(--minor)"></i>AI &amp; cyber security</h2>
-    <div class="scroll"><div class="scroll-inner" id="ai"></div></div>
+    <div class="scroll no-autoscroll"><div class="scroll-inner" id="ai"></div></div>
   </section>
 
-  <section class="card">
+  <section class="card claude-card">
     <h2><i class="dot" style="background:var(--violet)"></i>Claude updates</h2>
     <div class="scroll"><div class="scroll-inner" id="claude"></div></div>
   </section>
@@ -180,6 +217,73 @@
   }
  ],
  "statusSource": "Live: status.claude.com (Claude) · other rows set manually",
+ "rota": [
+  {
+   "date": "2026-10-27",
+   "name": "Alex Brent"
+  },
+  {
+   "date": "2026-10-29",
+   "name": "Ethan Coombs"
+  },
+  {
+   "date": "2026-11-03",
+   "name": "Callum East"
+  },
+  {
+   "date": "2026-11-05",
+   "name": "Dave Fletcher"
+  },
+  {
+   "date": "2026-11-10",
+   "name": "REACT"
+  },
+  {
+   "date": "2026-11-12",
+   "name": "Tom Gough"
+  },
+  {
+   "date": "2026-11-17",
+   "name": "Chris Sawyer"
+  },
+  {
+   "date": "2026-11-19",
+   "name": "Owen Jones"
+  },
+  {
+   "date": "2026-11-24",
+   "name": "Mark King"
+  },
+  {
+   "date": "2026-11-26",
+   "name": "Connor Lambert"
+  },
+  {
+   "date": "2026-12-01",
+   "name": "Stuart Lay"
+  },
+  {
+   "date": "2026-12-03",
+   "name": "John Meyrick"
+  },
+  {
+   "date": "2026-12-08",
+   "name": "Dewi Perkins"
+  },
+  {
+   "date": "2026-12-10",
+   "name": "Jade Roberts"
+  },
+  {
+   "date": "2026-12-15",
+   "name": "Zen Gregory"
+  },
+  {
+   "date": "2026-12-17",
+   "name": "Jane Watkins"
+  }
+ ],
+ "visitorsAll": [],
  "fraud": [
   {
    "when": "22 Nov",
@@ -326,15 +430,47 @@ if (D.alert && D.alert.show) {
   document.getElementById('alertMsg').innerHTML = `${esc(D.alert.text)}<br><span>${esc(D.alert.detail)}</span>`;
 } else al.classList.add('hidden');
 
-document.getElementById('services').innerHTML = D.services.map(s =>
-  `<div class="svc"><i class="light ${s.state}"></i><div><div><span class="svc-name">${esc(s.name)}</span><span class="svc-state ${s.state}">${esc(s.label)}</span></div><div class="svc-note">${esc(s.note)}</div></div></div>`).join('');
+// Service status — only render rows that aren't "ok"; show an all-clear state otherwise
+function renderServices(list){
+  const down = list.filter(s => s.state !== 'ok');
+  const el = document.getElementById('services');
+  if (down.length === 0){
+    el.innerHTML = `<div class="allclear"><div class="tick">&#10003;</div><div class="headline">All systems operational</div><div class="sub2">${list.length} services monitored — nothing to report</div></div>`;
+  } else {
+    el.innerHTML = down.map(s =>
+      `<div class="svc"><i class="light ${s.state}"></i><div><div><span class="svc-name">${esc(s.name)}</span><span class="svc-state ${s.state}">${esc(s.label)}</span></div><div class="svc-note">${esc(s.note)}</div></div></div>`).join('');
+  }
+}
+renderServices(D.services);
+
 document.getElementById('statusSrc').textContent = D.statusSource;
-document.getElementById('fraud').innerHTML = items(D.fraud);
-document.getElementById('ai').innerHTML = items(D.ai);
-document.getElementById('claude').innerHTML = items(D.claude);
+document.getElementById('fraud').innerHTML = items(D.fraud.slice(0, 3));
+document.getElementById('ai').innerHTML = items(D.ai.slice(0, 3));
+document.getElementById('claude').innerHTML = items(D.claude.slice(0, 1));
 document.getElementById('rules').innerHTML = D.rules.map(r => `<div class="rule"><b style="${r.small?'font-size:1.13vw;padding:.3vw 0':''}">${esc(r.big)}</b><span>${esc(r.text)}</span></div>`).join('');
 document.getElementById('ticker').innerHTML = D.ticker.map(t => `<span>${esc(t)}</span>`).join('');
 document.getElementById('updated').textContent = 'Updated ' + D.updated;
+
+// Upcoming in Rototherm — auto-advances: picks the next 2 rota dates from
+// today (UK time), so this never needs a manual weekly update.
+const todayISO = new Date().toLocaleDateString('en-CA', {timeZone: 'Europe/London'});
+const nextHosts = (D.rota || []).filter(r => r.date >= todayISO).slice(0, 2);
+const hostsHtml = nextHosts.length
+  ? nextHosts.map(h => {
+      const label = new Date(h.date + 'T00:00:00').toLocaleDateString('en-GB', {day:'numeric', month:'short'});
+      const isToday = h.date === todayISO;
+      return `<div class="u-row"><span class="u-date">${esc(label)}</span><span class="u-name">${esc(h.name)}${isToday ? '<span class="u-tag">Today</span>' : ''}</span></div>`;
+    }).join('')
+  : '<div class="u-empty">Rota needs new dates added</div>';
+const nextVisitors = (D.visitorsAll || []).filter(v => v.date >= todayISO).slice(0, 3);
+const visitorsHtml = nextVisitors.length
+  ? nextVisitors.map(v => {
+      const label = new Date(v.date + 'T00:00:00').toLocaleDateString('en-GB', {day:'numeric', month:'short'});
+      return `<div class="u-row"><span class="u-date">${esc(label)}</span><span class="u-name">${esc(v.name)}</span></div>`;
+    }).join('')
+  : '<div class="u-empty">No visitors scheduled</div>';
+document.getElementById('upcoming').innerHTML =
+  `<div class="u-list">${hostsHtml}</div><h3>Visitors / events</h3>${visitorsHtml}`;
 
 // Clock (UK time)
 function tick(){
@@ -344,8 +480,52 @@ function tick(){
 }
 tick(); setInterval(tick, 10000);
 
+// Seasonal flourish — a burst of themed particles once an hour (UK time),
+// so the board stays quiet most of the time and doesn't distract from the content.
+const SEASONS = {
+  winter: ['❄', '❅', '❆'],
+  spring: ['🌸', '🌺', '🌼'],
+  summer: ['☀️', '✨'],
+  autumn: ['🍂', '🍁']
+};
+function seasonForMonth(m){ // m: 0=Jan .. 11=Dec
+  if (m === 11 || m <= 1) return 'winter';
+  if (m <= 4) return 'spring';
+  if (m <= 7) return 'summer';
+  return 'autumn';
+}
+function spawnSeasonalBurst(){
+  const ukMonth = parseInt(new Date().toLocaleString('en-GB', {month:'numeric', timeZone:'Europe/London'}), 10) - 1;
+  const glyphs = SEASONS[seasonForMonth(ukMonth)];
+  const layer = document.getElementById('seasonalLayer');
+  for (let i = 0; i < 22; i++){
+    const el = document.createElement('span');
+    el.className = 'particle';
+    el.textContent = glyphs[Math.floor(Math.random() * glyphs.length)];
+    const dur = 8 + Math.random() * 6;
+    const delay = Math.random() * 5;
+    el.style.left = (Math.random() * 100) + 'vw';
+    el.style.fontSize = (1.1 + Math.random() * 1.3) + 'vw';
+    el.style.setProperty('--dx1', (Math.random() * 10 - 5).toFixed(1) + 'vw');
+    el.style.setProperty('--dx2', (Math.random() * 10 - 5).toFixed(1) + 'vw');
+    el.style.animationDuration = dur + 's';
+    el.style.animationDelay = delay + 's';
+    layer.appendChild(el);
+    setTimeout(() => el.remove(), (dur + delay) * 1000 + 500);
+  }
+}
+spawnSeasonalBurst(); // fire once on load so the effect is visible straight away
+let seasonalLastHour = new Date().getHours();
+setInterval(() => {
+  const now = new Date();
+  if (now.getMinutes() === 0 && now.getHours() !== seasonalLastHour){
+    seasonalLastHour = now.getHours();
+    spawnSeasonalBurst();
+  }
+}, 30000);
+
 // Gentle auto-scroll for any panel whose content overflows (TV has no mouse)
-document.querySelectorAll('.scroll').forEach(box => {
+document.querySelectorAll('.scroll:not(.no-autoscroll)').forEach(box => {
   const inner = box.querySelector('.scroll-inner');
   let pos = 0, dir = 1, pause = 175;
   setInterval(() => {
