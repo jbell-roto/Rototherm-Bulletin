@@ -19,8 +19,14 @@ jobs:
     # Needs a runner inside the company network with a route to SQL-ROTO-02 -
     # GitHub's own cloud runners have no path to it. See README/RUNBOOK for
     # how this runner is set up.
-    # Windows runner - plain PowerShell (the default here), no bash dependency.
     runs-on: self-hosted
+    # Force the built-in Windows PowerShell 5.1 (a real system binary at a
+    # fixed path) rather than `pwsh`, which on this runner resolves to a
+    # Microsoft Store "app execution alias" stub that fails to launch
+    # ("Access is denied") outside a full interactive logon session.
+    defaults:
+      run:
+        shell: powershell
     steps:
       - uses: actions/checkout@v4
 
