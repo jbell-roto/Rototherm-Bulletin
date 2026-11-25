@@ -1,0 +1,48 @@
+name: Health & Safety refresh (self-hosted)
+
+on:
+  schedule:
+    # 10 past the hour (offset from the main 05-past refresh) so the two
+    # workflows don't race to commit at the same moment.
+    - cron: '10 8,12,15 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: health-safety-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    # Needs a runner inside the company network with a route to SQL-ROTO-02 -
+    # GitHub's own cloud runners have no path to it. See README/RUNBOOK for
+    # how this runner is set up.
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch latest Health & Safety figures from SQL-ROTO-02
+        env:
+          HS_DB_SERVER: ${{ secrets.HS_DB_SERVER }}
+          HS_DB_NAME: ${{ secrets.HS_DB_NAME }}
+          HS_DB_USER: ${{ secrets.HS_DB_USER }}
+          HS_DB_PASSWORD: ${{ secrets.HS_DB_PASSWORD }}
+          HS_DB_DOMAIN: ${{ secrets.HS_DB_DOMAIN }}
+        run: |
+          npm install mssql@12.8.1 --no-save
+          node scripts/fetch_health_safety.mjs
+
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet -- index.html; then
+            echo "No changes"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add index.html
+            git commit -m "Health & Safety refresh"
+            git pull --rebase origin main
+            git push
+          fi
