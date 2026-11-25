@@ -20,6 +20,12 @@ jobs:
     # GitHub's own cloud runners have no path to it. See README/RUNBOOK for
     # how this runner is set up.
     runs-on: self-hosted
+    # The self-hosted runner is Windows, where the default `run:` shell is
+    # PowerShell, not bash - force bash (Git Bash, already on the machine)
+    # so the commit/push step's bash syntax below actually parses.
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@v4
 
