@@ -24,6 +24,36 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Make sure git is on PATH for later steps
+        # actions/checkout doesn't need a PATH-resolved git.exe, but our own
+        # steps below do - and this runner's background-service environment
+        # doesn't carry the interactive user's PATH. $GITHUB_PATH is the
+        # officially supported way to extend PATH for the rest of this job,
+        # without touching the machine's own PATH or the runner service.
+        run: |
+          $existing = Get-Command git -ErrorAction SilentlyContinue
+          if ($existing) {
+            Write-Host "git already on PATH: $($existing.Source)"
+          } else {
+            $candidates = @(
+              "$env:ProgramFiles\Git\cmd",
+              "$env:ProgramFiles\Git\bin",
+              "${env:ProgramFiles(x86)}\Git\cmd",
+              # $env:LOCALAPPDATA is account-relative, and the runner service
+              # runs as a different Windows account than the interactive user
+              # - so a per-user Git install needs its real, absolute path,
+              # not a templated guess that only resolves for one account.
+              "C:\Users\jbell\AppData\Local\Programs\Git\cmd"
+            )
+            $found = $candidates | Where-Object { Test-Path "$_\git.exe" } | Select-Object -First 1
+            if (-not $found) {
+              Write-Error "Could not find git.exe in any known install location."
+              exit 1
+            }
+            Add-Content -Path $env:GITHUB_PATH -Value $found
+            Write-Host "Added $found to PATH for the rest of this job"
+          }
+
       - name: Fetch latest Health & Safety figures from SQL-ROTO-02
         env:
           HS_DB_SERVER: ${{ secrets.HS_DB_SERVER }}
