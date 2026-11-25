@@ -19,13 +19,8 @@ jobs:
     # Needs a runner inside the company network with a route to SQL-ROTO-02 -
     # GitHub's own cloud runners have no path to it. See README/RUNBOOK for
     # how this runner is set up.
+    # Windows runner - plain PowerShell (the default here), no bash dependency.
     runs-on: self-hosted
-    # The self-hosted runner is Windows, where the default `run:` shell is
-    # PowerShell, not bash - force bash (Git Bash, already on the machine)
-    # so the commit/push step's bash syntax below actually parses.
-    defaults:
-      run:
-        shell: bash
     steps:
       - uses: actions/checkout@v4
 
@@ -42,13 +37,14 @@ jobs:
 
       - name: Commit and push if changed
         run: |
-          if git diff --quiet -- index.html; then
-            echo "No changes"
-          else
+          git diff --quiet -- index.html
+          if ($LASTEXITCODE -eq 0) {
+            Write-Host "No changes"
+          } else {
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add index.html
             git commit -m "Health & Safety refresh"
             git pull --rebase origin main
             git push
-          fi
+          }
