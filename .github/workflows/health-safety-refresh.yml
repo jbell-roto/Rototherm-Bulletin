@@ -60,6 +60,14 @@ jobs:
             Write-Host "Added $found to PATH for the rest of this job"
           }
 
+      - name: Mark the workspace as a safe git directory
+        # This folder was first created while the runner service logged on
+        # as NETWORK SERVICE; now it runs as a real user, git's ownership
+        # check (a protection against a known local-privilege-escalation
+        # attack) refuses to operate on a repo "owned" by a different
+        # account until explicitly told this one is fine.
+        run: git config --global --add safe.directory "${{ github.workspace }}"
+
       - name: Fetch latest Health & Safety figures from SQL-ROTO-02
         env:
           HS_DB_SERVER: ${{ secrets.HS_DB_SERVER }}
