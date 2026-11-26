@@ -35,9 +35,13 @@ SECTIONS = {
         ),
     },
     "ai": {
-        "count": "exactly 3",
+        "count": "exactly 2",
         "tag_rule": '"tag" is "hot" for the single most urgent item, else "".',
-        "topic": "the 3 most recent AI & cyber-security news items relevant to an ordinary office worker",
+        "topic": (
+            "the 2 most important and most up to date AI & cyber-security news items "
+            "relevant to an ordinary office worker — prefer major, widely-reported "
+            "developments from the last few days over minor or stale ones"
+        ),
     },
 }
 
