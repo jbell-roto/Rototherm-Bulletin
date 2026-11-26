@@ -1,12 +1,10 @@
-name: Bulletin refresh (8:05, 12:05, 15:05 UK)
+name: Bulletin refresh (hourly, :10 past)
 
 on:
   schedule:
-    # 08:05, 12:05 and 15:05 UTC. A few minutes past the hour, not on it,
-    # since GitHub's scheduler is most congested (and most likely to delay
-    # runs) right at :00. UK is UTC+0 in winter (GMT) and UTC+1 in summer
-    # (BST), so during BST this lands ~1 hour later local time.
-    - cron: '5 8,12,15 * * *'
+    # 10 past every hour, not on the dot, since GitHub's scheduler is most
+    # congested (and most likely to delay runs) right at :00.
+    - cron: '10 * * * *'
   workflow_dispatch: {}
 
 permissions:
