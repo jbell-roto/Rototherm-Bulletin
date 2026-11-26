@@ -180,7 +180,8 @@
   "show": true,
   "tag": "NOTICE",
   "text": "Christmas Jumper Day is Thursday 10 December.",
-  "detail": "Wear your Christmas jumper to work!"
+  "detail": "",
+  "until": "2026-12-10"
  },
  "services": [
   {
@@ -399,11 +400,14 @@ const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;
 const pill = t => t==='hot' ? '<span class="pill hot">ALERT</span>' : t==='new' ? '<span class="pill new">NEW</span>' : t==='rel' ? '<span class="pill rel">RELEVANT TO US</span>' : '';
 const items = arr => arr.map(i => `<div class="item"><div class="item-top"><span class="when">${esc(i.when)}</span><span class="item-title">${esc(i.title)}${pill(i.tag)}</span></div><div class="item-body">${esc(i.body)}</div></div>`).join('');
 
-// Alert banner
+const todayISO = new Date().toLocaleDateString('en-CA', {timeZone: 'Europe/London'});
+
+// Alert banner — an optional "until" (YYYY-MM-DD) auto-hides it after that
+// date, so a one-off notice like "jumper day" doesn't need a manual takedown.
 const al = document.getElementById('alert');
-if (D.alert && D.alert.show) {
+if (D.alert && D.alert.show && (!D.alert.until || todayISO <= D.alert.until)) {
   document.getElementById('alertTag').textContent = D.alert.tag;
-  document.getElementById('alertMsg').innerHTML = `${esc(D.alert.text)}<br><span>${esc(D.alert.detail)}</span>`;
+  document.getElementById('alertMsg').innerHTML = esc(D.alert.text) + (D.alert.detail ? `<br><span>${esc(D.alert.detail)}</span>` : '');
 } else al.classList.add('hidden');
 
 // Service status — only render rows that aren't "ok"; show an all-clear state otherwise
@@ -473,7 +477,6 @@ document.getElementById('updated').textContent = 'Updated ' + D.updated;
 
 // Upcoming in Rototherm — auto-advances: picks the next 2 rota dates from
 // today (UK time), so this never needs a manual weekly update.
-const todayISO = new Date().toLocaleDateString('en-CA', {timeZone: 'Europe/London'});
 const nextHosts = (D.rota || []).filter(r => r.date >= todayISO).slice(0, 2);
 const hostsHtml = nextHosts.length
   ? nextHosts.map(h => {
